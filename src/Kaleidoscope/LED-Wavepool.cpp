@@ -39,16 +39,9 @@ PROGMEM const uint8_t WavepoolEffect::rc2pos[ROWS*COLS] = {
     42, 43, 44, 45, 46, 47,     58,62, 63,67,    50, 51, 52, 53, 54, 55,
 };
 
-WavepoolEffect::WavepoolEffect(void) {
-}
-
-void WavepoolEffect::setup(void) {
-  Kaleidoscope.useEventHandlerHook(eventHandlerHook);
-}
-
-Key WavepoolEffect::eventHandlerHook(Key mapped_key, byte row, byte col, uint8_t key_state) {
+EventHandlerResult WavepoolEffect::onKeyswitchEvent(Key &mapped_key, byte row, byte col, uint8_t key_state) {
   if (row >= ROWS || col >= COLS)
-    return mapped_key;
+    return EventHandlerResult::OK;
 
   if (keyIsPressed(key_state)) {
     uint8_t offset = (row*COLS)+col;
@@ -56,7 +49,7 @@ Key WavepoolEffect::eventHandlerHook(Key mapped_key, byte row, byte col, uint8_t
     frames_since_event = 0;
   }
 
-  return mapped_key;
+  return EventHandlerResult::OK;
 }
 
 void WavepoolEffect::raindrop(uint8_t x, uint8_t y, int8_t *page) {

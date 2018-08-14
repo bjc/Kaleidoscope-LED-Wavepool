@@ -27,7 +27,9 @@
 namespace kaleidoscope {
 class WavepoolEffect : public LEDMode {
  public:
-  WavepoolEffect(void);
+  WavepoolEffect(void) {};
+
+  EventHandlerResult onKeyswitchEvent(Key &mapped_key, byte row, byte col, uint8_t key_state);
 
   // ms before idle animation starts after last keypress
   static uint16_t idle_timeout;
@@ -36,7 +38,6 @@ class WavepoolEffect : public LEDMode {
   const uint8_t starting_hue = 192;
 
  protected:
-  void setup(void) final;
   void update(void) final;
 
  private:
@@ -45,7 +46,6 @@ class WavepoolEffect : public LEDMode {
   static uint8_t page;
   static PROGMEM const uint8_t rc2pos[ROWS*COLS];
 
-  static Key eventHandlerHook(Key mapped_key, byte row, byte col, uint8_t key_state);
   static void raindrop(uint8_t x, uint8_t y, int8_t *page);
   static uint8_t wp_rand();
 };
