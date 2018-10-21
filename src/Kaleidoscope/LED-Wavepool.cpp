@@ -17,14 +17,13 @@
  */
 
 #include <Kaleidoscope-LED-Wavepool.h>
-#include <LEDUtils.h>
 
 namespace kaleidoscope {
 
 #define INTERPOLATE // smoother, slower animation
 #define MS_PER_FRAME 40  // 40 = 25 fps
 #define FRAMES_PER_DROP 120  // max time between raindrops during idle animation
-#undef CONSTANT_HUE
+#define CONSTANT_HUE
 
 int8_t WavepoolEffect::surface[2][WP_WID*WP_HGT];
 uint8_t WavepoolEffect::page = 0;
